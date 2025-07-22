@@ -1,0 +1,866 @@
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.7; /* Slightly increased line height for better readability with larger text */
+    color: #D1D8E0; /* Light Gray for general text on dark background */
+    background-color: #1A1E2B; /* Deep Charcoal Blue for main background */
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3; /* Adjusted line height for headings */
+    color: #9AA8BE; /* Muted Silver/Titanium for headings */
+}
+
+h2 {
+    font-size: 2.8rem; /* Increased from 2.5rem */
+    margin-bottom: 1.2rem;
+}
+
+h3 {
+    font-size: 1.7rem; /* Increased from 1.5rem */
+    margin-bottom: 0.7rem;
+}
+
+p {
+    font-size: 1.15rem; /* Increased from 1rem/1.1rem */
+    margin-bottom: 1.2rem;
+    line-height: 1.8; /* Adjusted line height */
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 30, 43, 0.95); /* Semi-transparent Deep Charcoal Blue */
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(140, 150, 170, 0.1); /* Subtle border */
+}
+
+.navbar.scrolled {
+    background: rgba(26, 30, 43, 0.98); /* Slightly less transparent */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo a {
+    font-size: 1.6rem; /* Slightly increased logo size */
+    font-weight: 700;
+    text-decoration: none;
+    color: #9AA8BE; /* Muted Silver/Titanium for logo */
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.2rem; /* Slightly increased gap */
+}
+
+.nav-link {
+    font-size: 1.15rem; /* Increased from 1.05rem */
+    text-decoration: none;
+    color: #D1D8E0; /* Light Gray */
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #00BFFF; /* Electric Blue on hover */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00BFFF; /* Electric Blue for underline */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: #D1D8E0; /* Light Gray */
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 28px; /* Slightly increased padding */
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.05rem; /* Slightly increased button font size */
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00BFFF, #00CFFF); /* Electric Blue gradient */
+    color: #1A1E2B; /* Deep Charcoal Blue for text on vibrant button */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00CFFF, #00BFFF); /* Reversed gradient on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #00BFFF; /* Electric Blue */
+    border: 2px solid #00BFFF; /* Electric Blue border */
+}
+
+.btn-secondary:hover {
+    background: #00BFFF; /* Electric Blue */
+    color: #1A1E2B; /* Deep Charcoal Blue */
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 0.95rem; /* Adjusted font size */
+}
+
+.btn-outline {
+    background: transparent;
+    color: #9AA8BE; /* Muted Silver/Titanium */
+    border: 1px solid #9AA8BE; /* Muted Silver/Titanium border */
+}
+
+.btn-outline:hover {
+    background: #9AA8BE; /* Muted Silver/Titanium */
+    color: #1A1E2B; /* Deep Charcoal Blue */
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #1A1E2B 0%, #11141F 100%); /* Dark background gradient */
+    padding-top: 80px;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.8rem; /* Increased from 3.5rem */
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: #9AA8BE; /* Muted Silver/Titanium for title */
+}
+
+.highlight {
+    background: linear-gradient(135deg, #00BFFF, #00CFFF); /* Electric Blue gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.6rem; /* Increased from 1.5rem */
+    color: #B2BECB; /* Lighter gray for subtitle */
+    margin-bottom: 1.8rem;
+}
+
+.hero-description {
+    font-size: 1.2rem; /* Increased from 1.125rem */
+    color: #D1D8E0; /* Light Gray for description */
+    margin-bottom: 2.2rem;
+    line-height: 1.8; /* Adjusted line height */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.2rem; /* Slightly increased gap */
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background: #23283A; /* Slightly lighter dark background for the card */
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 191, 255, 0.2); /* Subtle blue border */
+}
+
+.profile-img {
+    width: 285px;
+    height: 285px;
+    background-color: #1A1E2B; /* Deep Charcoal Blue to match main background */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #9AA8BE; /* Muted Silver/Titanium for icon if no image */
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+.floating-icons {
+    position: absolute;
+}
+
+.floating-icons i {
+    position: absolute;
+    font-size: 2.2rem; /* Slightly increased icon size */
+    color: #00BFFF; /* Electric Blue for floating icons */
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-icons i:nth-child(1) {
+    top: -20px;
+    left: -20px;
+    animation-delay: 0s;
+}
+
+.floating-icons i:nth-child(2) {
+    top: -20px;
+    right: -20px;
+    animation-delay: 0.5s;
+}
+
+.floating-icons i:nth-child(3) {
+    bottom: -20px;
+    left: -20px;
+    animation-delay: 1s;
+}
+
+.floating-icons i:nth-child(4) {
+    bottom: -20px;
+    right: -20px;
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Section Styles */
+.section-title {
+    text-align: center;
+    margin-bottom: 3.5rem; /* Increased margin */
+    color: #9AA8BE; /* Muted Silver/Titanium for section titles */
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #00BFFF, #00CFFF); /* Electric Blue gradient */
+    border-radius: 2px;
+}
+
+/* About Section */
+.about {
+    padding: 110px 0; /* Increased padding */
+    background: #1A1E2B; /* Deep Charcoal Blue for sections */
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4.5rem; /* Slightly increased gap */
+    align-items: start;
+}
+
+.about-text h3 {
+    color: #9AA8BE; /* Muted Silver/Titanium for about subheadings */
+    margin-bottom: 1.8rem; /* Increased margin */
+}
+
+.about-text p {
+    font-size: 1.2rem; /* Increased from 1.1rem */
+    color: #D1D8E0; /* Light Gray */
+    margin-bottom: 1.8rem; /* Increased margin */
+    line-height: 1.8; /* Adjusted line height */
+}
+
+.about-highlights {
+    display: flex;
+    gap: 2.5rem; /* Increased gap */
+    margin-top: 2.5rem; /* Increased margin */
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem; /* Slightly increased gap */
+    color: #00BFFF; /* Electric Blue for highlight items */
+    font-weight: 600;
+    font-size: 1.1rem; /* Slightly increased font size */
+}
+
+.highlight-item i {
+    font-size: 1.35rem; /* Slightly increased icon size */
+}
+
+.about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Increased gap */
+}
+
+.stat-item {
+    text-align: center;
+    padding: 2.2rem; /* Increased padding */
+    background: #23283A; /* Slightly lighter dark background for stat items */
+    border-radius: 12px;
+    border-left: 4px solid #00BFFF; /* Electric Blue border */
+}
+
+.stat-item h4 {
+    font-size: 2.8rem; /* Increased from 2.5rem */
+    color: #9AA8BE; /* Muted Silver/Titanium for stats numbers */
+    margin-bottom: 0.6rem;
+}
+
+.stat-item p {
+    font-size: 1.05rem; /* Slightly increased font size */
+    color: #B2BECB; /* Lighter gray */
+    margin: 0;
+}
+
+/* Skills Section */
+.skills {
+    padding: 110px 0; /* Increased padding */
+    background: #23283A; /* Slightly lighter dark background for skills section */
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem; /* Increased gap */
+}
+
+.skills-category h3 {
+    color: #9AA8BE; /* Muted Silver/Titanium for skill category titles */
+    margin-bottom: 2.8rem; /* Increased margin */
+    font-size: 1.8rem; /* Increased from 1.5rem */
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem; /* Increased gap */
+    justify-items: center;
+}
+
+.skill-box {
+    background: #1A1E2B; /* Deep Charcoal Blue for skill boxes */
+    padding: 2.8rem 2.2rem; /* Increased padding */
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.1), transparent); /* Electric Blue subtle effect */
+    transition: left 0.6s ease;
+}
+
+.skill-box:hover::before {
+    left: 100%;
+}
+
+.skill-box:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    border-color: #00BFFF; /* Electric Blue border on hover */
+}
+
+.skill-icon {
+    width: 85px; /* Slightly increased size */
+    height: 85px; /* Slightly increased size */
+    margin: 0 auto 1.8rem; /* Increased margin */
+    background: linear-gradient(135deg, #00BFFF, #00CFFF); /* Electric Blue gradient for icons */
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem; /* Increased icon size */
+    color: #1A1E2B; /* Deep Charcoal Blue text on vibrant icon */
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+}
+
+.skill-box:hover .skill-icon {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #00CFFF, #00A3CC); /* Changed to a more vibrant blue gradient */
+}
+
+.skill-box:hover .skill-icon::after {
+    width: 100px;
+    height: 100px;
+}
+
+.skill-box h4 {
+    color: #9AA8BE; /* Muted Silver/Titanium for skill names */
+    font-size: 1.35rem; /* Increased from 1.25rem */
+    margin-bottom: 1.2rem; /* Increased margin */
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.skill-box:hover h4 {
+    color: #00BFFF; /* Electric Blue on hover */
+}
+
+.skill-box p {
+    font-size: 1.05rem; /* Increased from 0.95rem */
+    color: #D1D8E0; /* Light Gray */
+    line-height: 1.7; /* Adjusted line height */
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.skill-box:hover p {
+    color: #B2BECB; /* Lighter gray */
+}
+/* Staggered animation for skill boxes */
+.skill-box:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.skill-box:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.skill-box:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.skill-box:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.skill-box:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.skill-box:nth-child(6) {
+    overflow: hidden;
+    animation-delay: 0.6s;
+}
+
+@keyframes skillBoxFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Projects Section */
+.projects {
+    padding: 110px 0; /* Increased padding */
+    background: #1A1E2B; /* Deep Charcoal Blue for sections */
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly increased min-width for cards */
+    gap: 2.5rem; /* Increased gap */
+}
+
+.project-card {
+    background: #161A26; /* Slightly darker background for project cards */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
+    border: 1px solid rgba(0, 191, 255, 0.05); /* Very subtle Electric Blue border */
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 191, 255, 0.4); /* Electric Blue glow shadow */
+    border-color: #00BFFF; /* Solid Electric Blue border on hover */
+}
+
+.project-image {
+    height: 220px; /* Increased height */
+    background: linear-gradient(135deg, #00BFFF, #00CFFF); /* Electric Blue gradient for project images */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.2rem; /* Increased icon size */
+    color: #1A1E2B; /* Deep Charcoal Blue text on vibrant image */
+}
+
+.project-content {
+    padding: 2.2rem; /* Increased padding */
+}
+
+.project-content h3 {
+    font-size: 1.45rem; /* Increased from 1.35rem */
+    color: #9AA8BE; /* Muted Silver/Titanium for project titles */
+    margin-bottom: 1.2rem; /* Increased margin */
+}
+
+.project-content p {
+    font-size: 1.1rem; /* Increased from 1.05rem */
+    color: #D1D8E0; /* Light Gray */
+    margin-bottom: 1.8rem; /* Increased margin */
+    line-height: 1.7; /* Adjusted line height */
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem; /* Slightly increased gap */
+    margin-bottom: 1.8rem; /* Increased margin */
+}
+
+.project-tech span {
+    background: rgba(0, 191, 255, 0.15); /* Semi-transparent Electric Blue for tech tags */
+    color: #D1D8E0; /* Light Gray for tech tag text */
+    padding: 0.3rem 0.8rem; /* Slightly increased padding */
+    border-radius: 20px;
+    font-size: 0.9rem; /* Slightly increased font size */
+    font-weight: 600;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.2rem; /* Slightly increased gap */
+}
+
+/* Contact Section */
+.contact {
+    padding: 110px 0; /* Increased padding */
+    background: #23283A; /* Slightly lighter dark background for contact section */
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem; /* Increased gap */
+}
+
+.contact-info h3 {
+    color: #9AA8BE; /* Muted Silver/Titanium for contact subheadings */
+    margin-bottom: 1.8rem; /* Increased margin */
+}
+
+.contact-info p {
+    font-size: 1.2rem; /* Increased from 1.1rem */
+    color: #D1D8E0; /* Light Gray */
+    margin-bottom: 2.2rem; /* Increased margin */
+    line-height: 1.8; /* Adjusted line height */
+}
+
+.contact-details {
+    margin-bottom: 2.2rem; /* Increased margin */
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem; /* Slightly increased gap */
+    margin-bottom: 1.2rem; /* Increased margin */
+    color: #D1D8E0; /* Light Gray */
+    font-size: 1.1rem; /* Slightly increased font size */
+}
+
+.contact-item i {
+    color: #00BFFF; /* Electric Blue for contact icons */
+    width: 22px; /* Slightly increased width */
+    font-size: 1.25rem; /* Increased icon size */
+}
+
+.social-links {
+    display: flex;
+    gap: 1.2rem; /* Slightly increased gap */
+}
+
+.social-link {
+    width: 55px; /* Slightly increased size */
+    height: 55px; /* Slightly increased size */
+    background: #1A1E2B; /* Deep Charcoal Blue */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9AA8BE; /* Muted Silver/Titanium for social icons */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    font-size: 1.5rem; /* Increased icon size */
+}
+
+.social-link:hover {
+    background: #00BFFF; /* Electric Blue on hover */
+    color: #1A1E2B; /* Deep Charcoal Blue */
+    transform: translateY(-3px);
+}
+
+.contact-form {
+    background: #1A1E2B; /* Deep Charcoal Blue */
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    border: 1px solid #00BFFF; /* Set border to Electric Blue */
+    transition: border 0.3s ease; /* Added transition for smooth effect */
+}
+
+.form-group {
+    margin-bottom: 1.8rem; /* Increased margin */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1.1rem; /* Increased padding */
+    border: 2px solid #2A3145; /* Darker border for input fields */
+    border-radius: 8px;
+    font-size: 1.1rem; /* Increased font size */
+    transition: border-color 0.3s ease;
+    background: #1A1E2B; /* Deep Charcoal Blue background for input fields */
+    color: #D1D8E0; /* Light Gray text color for input fields */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00BFFF; /* Electric Blue on focus */
+    background: #23283A; /* Slightly lighter dark on focus */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px; /* Increased min-height */
+}
+
+/* Footer */
+.footer {
+    background: #1A1E2B; /* Deep Charcoal Blue for footer background */
+    color: #D1D8E0; /* Light Gray */
+    text-align: center;
+    padding: 2.5rem 0; /* Increased padding */
+    border-top: 1px solid rgba(140, 150, 170, 0.1); /* Subtle border */
+}
+
+.footer p {
+    font-size: 1.05rem; /* Slightly increased font size */
+    margin-bottom: 0.6rem;
+}
+
+.footer i {
+    color: #00BFFF; /* Electric Blue for heart icon */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: #1A1E2B; /* Deep Charcoal Blue for mobile menu */
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.2); /* Darker shadow */
+        padding: 2rem 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem; /* Adjusted gap */
+    }
+    
+    .hero-title {
+        font-size: 2.8rem; /* Adjusted for mobile */
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem; /* Adjusted gap */
+    }
+    
+    .about-highlights {
+        flex-direction: column;
+        gap: 1.2rem; /* Adjusted gap */
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem; /* Adjusted gap */
+    }
+    
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem; /* Further adjusted for smaller mobile screens */
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem; /* Adjusted for mobile */
+    }
+
+    p {
+        font-size: 1rem; /* Adjusted for mobile */
+    }
+    
+    .profile-card {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem; /* Adjusted for mobile */
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+
+    .btn {
+        padding: 12px 24px; /* Adjusted button padding for mobile */
+        font-size: 1rem; /* Adjusted button font size for mobile */
+    }
+}
