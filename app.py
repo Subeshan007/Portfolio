@@ -14,10 +14,27 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret")
 
-# Database setup
+# Database setup with mongomock fallback
 mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017/healthcare_voice_agent")
-client = MongoClient(mongo_uri)
-db = client.get_database()
+use_mock = mongo_uri.strip().lower() == "mock"
+client = None
+
+if use_mock:
+    import mongomock
+    client = mongomock.MongoClient()
+    db = client["healthcare_voice_agent"]
+else:
+    try:
+        client = MongoClient(mongo_uri, serverSelectionTimeoutMS=1500)
+        # Trigger connection test
+        _ = client.server_info()
+        db = client.get_database()
+    except Exception:
+        # Fallback to in-memory
+        import mongomock
+        client = mongomock.MongoClient()
+        db = client["healthcare_voice_agent"]
+
 users_collection = db["users"]
 appointments_collection = db["appointments"]
 
@@ -135,7 +152,9 @@ def patient_portal():
     if not current_user.is_patient:
         flash("Access denied.", "error")
         return redirect(url_for("index"))
-    doctors = list(users_collection.find({"role": "doctor"}, {"username": 1, "specialty": 1}))
+    # Serialize IDs for template/JS consumption
+    raw_docs = list(users_collection.find({"role": "doctor"}, {"username": 1, "specialty": 1}))
+    doctors = [{"_id": str(d["_id"]), "username": d.get("username"), "specialty": d.get("specialty") } for d in raw_docs]
     return render_template("patient.html", doctors=doctors)
 
 
