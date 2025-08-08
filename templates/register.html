@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="card">
+  <h2>Create your account</h2>
+  <form method="post" class="form-grid" id="register-form">
+    <label>
+      <span>Username</span>
+      <input type="text" name="username" required autocomplete="username" />
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" required autocomplete="new-password" />
+    </label>
+    <label>
+      <span>Role</span>
+      <select name="role" id="role-select">
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+      </select>
+    </label>
+    <label id="specialty-field" style="display:none;">
+      <span>Specialty (for doctors)</span>
+      <input type="text" name="specialty" placeholder="e.g. Cardiology" />
+    </label>
+    <button type="submit" class="btn btn-primary">Create account</button>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const roleSelect = document.getElementById('role-select');
+  const specialtyField = document.getElementById('specialty-field');
+  roleSelect.addEventListener('change', () => {
+    specialtyField.style.display = roleSelect.value === 'doctor' ? 'block' : 'none';
+  });
+</script>
+{% endblock %}

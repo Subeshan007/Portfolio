@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="split">
+  <div class="panel">
+    <h2>Voice booking assistant</h2>
+    <p class="muted">Click the mic to begin. We will ask for your name, age, contact, reason, preferred date (YYYY-MM-DD), time (HH:MM), and a doctor if you have one in mind.</p>
+    <div class="voice-agent">
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+      <div class="controls">
+        <button id="start-voice" class="btn btn-primary">Start</button>
+        <button id="stop-voice" class="btn" disabled>Stop</button>
+      </div>
+      <div id="fallback-form" class="fallback" hidden>
+        <h3>Text fallback</h3>
+        <form id="text-booking" class="form-grid">
+          <label><span>Full name</span><input name="patient_name" required></label>
+          <label><span>Age</span><input name="age" type="number" min="0" step="1"></label>
+          <label><span>Contact</span><input name="contact" required placeholder="Phone or email"></label>
+          <label><span>Reason</span><input name="reason" required></label>
+          <label><span>Preferred date</span><input name="preferred_date" type="date" required></label>
+          <label><span>Preferred time</span><input name="preferred_time" type="time" required></label>
+          <label><span>Doctor</span>
+            <select name="doctor_id">
+              <option value="">No preference</option>
+              {% for d in doctors %}
+                <option value="{{ d._id }}">{{ d.username }}{% if d.specialty %} – {{ d.specialty }}{% endif %}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Your appointments</h2>
+    <div id="appointments" class="card">
+      <p class="muted">Loading...</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  window.CAREVOICE_DOCTORS = {{ doctors|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/voice_agent.js') }}"></script>
+<script>
+  async function loadAppointments() {
+    const res = await fetch('/api/appointments');
+    const data = await res.json();
+    const container = document.getElementById('appointments');
+    const items = (data.appointments || []);
+    if (items.length === 0) {
+      container.innerHTML = '<p class="muted">No appointments yet.</p>';
+      return;
+    }
+    container.innerHTML = items.map(a => `
+      <div class="appointment">
+        <div>
+          <strong>${a.reason}</strong>
+          <div class="muted">${a.preferred_date} at ${a.preferred_time}</div>
+        </div>
+        <div class="status ${a.status}">${a.status}</div>
+      </div>
+    `).join('');
+  }
+  loadAppointments();
+
+  // Fallback text form submission
+  const textForm = document.getElementById('text-booking');
+  if (textForm) {
+    textForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(textForm);
+      const payload = Object.fromEntries(formData.entries());
+      const res = await fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (data.ok) { alert('Appointment created!'); loadAppointments(); textForm.reset(); }
+      else { alert('Error: ' + data.error); }
+    });
+  }
+</script>
+{% endblock %}
