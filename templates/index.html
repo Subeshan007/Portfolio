@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1>Book healthcare appointments by simply talking</h1>
+    <p>CareVoice is an AI voice concierge that captures your needs and schedules your visit—all securely, with zero friction.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="{{ url_for('register') }}">Get started</a>
+      <a class="btn" href="{{ url_for('login') }}">I already have an account</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <h3>Accessible by design</h3>
+    <p>Voice-first UI with graceful text fallback to meet users where they are.</p>
+  </div>
+  <div class="feature">
+    <h3>Doctor and patient portals</h3>
+    <p>Patients book and track; doctors review and confirm with one click.</p>
+  </div>
+  <div class="feature">
+    <h3>Private and secure</h3>
+    <p>Your information is stored in your own MongoDB database; no third-party AI APIs required.</p>
+  </div>
+</section>
+{% endblock %}

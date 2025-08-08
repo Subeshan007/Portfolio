@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section class="card">
+  <h2>Doctor dashboard</h2>
+  <div id="doctor-appointments" class="stack">
+    {% if appointments|length == 0 %}
+      <p class="muted">No appointments assigned yet.</p>
+    {% else %}
+      {% for a in appointments %}
+        <div class="appointment">
+          <div>
+            <strong>{{ a.reason }}</strong>
+            <div class="muted">{{ a.patient_name }} • {{ a.preferred_date }} at {{ a.preferred_time }}</div>
+          </div>
+          <div class="status {{ a.status }}">{{ a.status }}</div>
+          <div class="actions">
+            <button class="btn" data-id="{{ a._id }}" data-status="confirmed">Confirm</button>
+            <button class="btn" data-id="{{ a._id }}" data-status="completed">Complete</button>
+            <button class="btn" data-id="{{ a._id }}" data-status="cancelled">Cancel</button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  document.querySelectorAll('.actions .btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.getAttribute('data-id');
+      const status = btn.getAttribute('data-status');
+      const res = await fetch(`/api/appointments/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) });
+      const data = await res.json();
+      if (data.ok) location.reload();
+      else alert('Error: ' + (data.error || 'Unknown'));
+    });
+  });
+</script>
+{% endblock %}
